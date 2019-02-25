@@ -2,18 +2,22 @@
   <div>
     <section class="profile">
       <Header title="我的"></Header>
-      <section class="profile-number" @click="$router.push('/login')">
+      <section class="profile-number" @click="$router.push(user._id ? '/userinfo' : '/login')">
         <a href="javascript:" class="profile-link">
           <div class="profile_image">
             <i class="iconfont icon-person"></i>
           </div>
           <div class="user-info">
-            <p class="user-info-top">登录/注册</p>
-            <p>
+            <p class="user-info-top" v-show="!user.phone">
+              {{user.name?user.name :'登录/注册'}}
+            </p>
+            <p v-show="!user.name">
                 <span class="user-icon">
                   <i class="iconfont icon-shouji icon-mobile"></i>
                 </span>
-              <span class="icon-mobile-number">暂无绑定手机号</span>
+              <span class="icon-mobile-number">
+                {{user.phone?user.phone:'未绑定'}}
+              </span>
             </p>
           </div>
           <span class="arrow">
@@ -89,12 +93,30 @@
           </div>
         </a>
       </section>
+      <section class="profile_my_order border-1px">
+        <button @click="logout">退出登陆</button>
+      </section>
     </section>
   </div>
 </template>
 
 <script>
-  export default {}
+  import {mapState} from 'vuex'
+
+  export default {
+    computed: {
+      ...mapState(['user'])
+    },
+    methods: {
+      logout() {
+        if (confirm('你确认退出吗?')) {
+          this.$store.dispatch('logout')
+        }
+      }
+
+    }
+
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus" scoped>
   @import "../../../static/css/mixins.styl"
@@ -125,6 +147,7 @@
       color #fff
       font-size 22px
       text-align center
+
   .profile //我的
     width 100%
     .profile-number
@@ -223,12 +246,12 @@
         display flex
         align-items center
         padding-left 15px
-        >span
+        > span
           display flex
           align-items center
           width 20px
           height 20px
-          >.iconfont
+          > .iconfont
             margin-left -10px
             font-size 30px
           .icon-order-s

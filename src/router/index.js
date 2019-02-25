@@ -9,6 +9,7 @@ import Search from '../pages/Search/Search.vue'
 import Order from '../pages/Order/Order.vue'
 import Profile from '../pages/Profile/Profile.vue'
 import Login from '../pages/Login/Login'
+import Userinfo from '../pages/Userinfo/Userinfo'
 Vue.use(VueRouter)
 
 export default new VueRouter({
@@ -50,6 +51,10 @@ export default new VueRouter({
     {
       path: '/Login',
       component: Login
+    },
+    {
+      path: '/Userinfo',
+      component: Userinfo
     }
   ]
 })

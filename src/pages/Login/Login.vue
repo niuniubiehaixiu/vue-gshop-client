@@ -19,8 +19,8 @@
                 {{computedTime>0? `已发送${computedTime}s`: '获取验证码'}}
               </button>
             </section>
-            <section class="login_verification" v-model="code">
-              <input type="tel" maxlength="8" placeholder="验证码">
+            <section class="login_verification" >
+              <input type="tel" maxlength="8" placeholder="验证码" v-model="code">
             </section>
             <section class="login_hint">
               温馨提示：未注册硅谷外卖帐号的手机号，登录时将自动注册，且代表已同意
@@ -109,7 +109,7 @@
           if (!isShowPhone){
             alert('请输入手机号')
             return
-          }else if (/^\d{6}$/.test(code)) {
+          }else if (!/^\d{6}$/.test(code)) {
             alert('验证码必须是6位数字')
             return
 

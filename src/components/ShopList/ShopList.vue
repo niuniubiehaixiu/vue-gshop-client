@@ -6,7 +6,7 @@
     </div>
     <div class="shop_container">
       <ul class="shop_list" v-if="shops.length>0">
-        <li class="shop_li border-1px" v-for="(shop , index) in shops" :key="index">
+        <li class="shop_li border-1px" v-for="(shop , index) in shops" :key="index" @click="$router.replace('/shop')">
           <a>
             <div class="shop_left">
               <img class="shop_img" :src="baseImgUrl + shop.image_path">
@@ -69,7 +69,9 @@
     },
 
     computed: {
-      ...mapState(['shops'])
+      ...mapState({
+        shops: state => state.msite.shops
+      })
     }
   }
 </script>

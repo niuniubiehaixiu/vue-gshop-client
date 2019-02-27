@@ -4,6 +4,7 @@ import router from './router'
 import Header from './components/Header/Header'
 import Start from './components/Start/Start'
 import store from './store'
+import './mock/mockServer'
 
 
 Vue.component('Header', Header)//全局声明
